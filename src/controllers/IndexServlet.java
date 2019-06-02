@@ -36,13 +36,29 @@ public class IndexServlet extends HttpServlet {
             throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
+        int page = 1;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch (NumberFormatException e) {
+        }
+
+        //最大件数と開始位置を指定してメッセージを取得
         List<Message> tasks = em.createNamedQuery("getAllMessages", Message.class)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
                 .getResultList();
-        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
+
+        //全件数を取得
+        long task_count = (long) em.createNamedQuery("getMessagesCount", Long.class)
+                .getSingleResult();
 
         em.close();
 
         request.setAttribute("tasks", tasks);
+        request.setAttribute("task_count", task_count);
+        request.setAttribute("page", page);
+
+
 
         //フラッシュメッセージがセッションスコープにセットされていたら
         //リクエストスコープに保存する

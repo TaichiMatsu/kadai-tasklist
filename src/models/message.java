@@ -13,8 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getAllMessages",
-                query = "SELECT m FROM Message AS m ORDER BY m.id DESC")
+        @NamedQuery(name = "getAllMessages", query = "SELECT m FROM Message AS m ORDER BY m.id DESC"),
+        @NamedQuery(name = "getMessagesCount", query = "SELECT COUNT(m) FROM Message AS m")
 })
 @Table(name = "tasks")
 public class Message {
@@ -47,7 +47,7 @@ public class Message {
         return created_at;
     }
 
-    public void setCreated_at(Timestamp created_at){
+    public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
 
@@ -55,10 +55,9 @@ public class Message {
         return updated_at;
     }
 
-    public void setUpdated_at(Timestamp updated_at){
+    public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
-
 
     public String getContent() {
         return content;
