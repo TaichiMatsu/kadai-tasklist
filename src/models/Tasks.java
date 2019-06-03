@@ -13,11 +13,11 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "getAllMessages", query = "SELECT m FROM Message AS m ORDER BY m.id DESC"),
-        @NamedQuery(name = "getMessagesCount", query = "SELECT COUNT(m) FROM Message AS m")
+        @NamedQuery(name = "getAllTasks", query = "SELECT m FROM Tasks AS m ORDER BY m.id DESC"),
+        @NamedQuery(name = "getTasksCount", query = "SELECT COUNT(m) FROM Tasks AS m")
 })
 @Table(name = "tasks")
-public class Message {
+public class Tasks {
 
     //カラムの作成
     @Id
@@ -68,3 +68,6 @@ public class Message {
     }
 
 }
+
+
+
